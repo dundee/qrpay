@@ -1,6 +1,7 @@
 package spayd_test
 
 import (
+	"fmt"
 	"testing"
 	"time"
 
@@ -17,14 +18,15 @@ func TestSettingLongAcc(t *testing.T) {
 	assert.Equal(t, "SPD*1.0*ACC:1234567890123456789012345678901234567890123456*", s)
 }
 
-func TestCZPayment(t *testing.T) {
+func ExampleSpaydPayment_GenerateString() {
 	p := spayd.NewSpaydPayment()
 	p.SetIBAN("CZ5855000000001265098001")
 	p.SetBIC("RZBCCZPP")
 	p.SetAmount("100.0")
 
 	s, _ := p.GenerateString()
-	assert.Equal(t, "SPD*1.0*ACC:CZ5855000000001265098001+RZBCCZPP*AM:100.0*", s)
+	fmt.Println(s)
+	// Output: SPD*1.0*ACC:CZ5855000000001265098001+RZBCCZPP*AM:100.0*
 }
 
 func TestDEPayment(t *testing.T) {
