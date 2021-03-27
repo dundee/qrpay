@@ -85,3 +85,13 @@ func TestWrongNotificationType(t *testing.T) {
 	p := spayd.NewSpaydPayment()
 	p.SetNofificationType('X')
 }
+
+func TestAsteriskInValue(t *testing.T) {
+	p := spayd.NewSpaydPayment()
+	p.SetIBAN("CZ5855000000001265098001")
+	p.SetMessage("aaa*bbb")
+
+	s, err := p.GenerateString()
+	assert.Nil(t, err)
+	assert.Equal(t, "SPD*1.0*ACC:CZ5855000000001265098001*MSG:AAA%2ABBB*", s)
+}
