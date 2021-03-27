@@ -20,6 +20,15 @@ func TestGetQRCodeImage(t *testing.T) {
 	assert.Equal(t, uint8(0x50), b[1])
 }
 
+func TestGetQRCodeImageWithErr(t *testing.T) {
+	p := payment.NewSpaydPayment()
+
+	b, err := payment.GetQRCodeImage(p)
+
+	assert.Nil(t, b)
+	assert.Equal(t, "IBAN is mandatory", err.Error())
+}
+
 func TestSaveQRCode(t *testing.T) {
 	path := "qr.jpeg"
 	defer os.Remove(path)
@@ -30,4 +39,12 @@ func TestSaveQRCode(t *testing.T) {
 	payment.SaveQRCodeImageToFile(p, path)
 
 	assert.FileExists(t, path)
+}
+
+func TestSaveQRCodeWithErr(t *testing.T) {
+	path := "qr.jpeg"
+	p := payment.NewSpaydPayment()
+	err := payment.SaveQRCodeImageToFile(p, path)
+
+	assert.Equal(t, "IBAN is mandatory", err.Error())
 }

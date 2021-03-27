@@ -44,6 +44,8 @@ func TestOtherParams(t *testing.T) {
 	p := spayd.NewSpaydPayment()
 	p.SetIBAN("CZ5855000000001265098001")
 	p.SetDate(time.Date(2021, 12, 24, 0, 0, 0, 0, time.UTC))
+	p.SetPaymentType("P2P")
+	p.SetSenderReference("111")
 	p.SetMessage("M")
 	p.SetRecipientName("go")
 	p.SetNofificationType('E')
@@ -52,7 +54,7 @@ func TestOtherParams(t *testing.T) {
 	s, _ := p.GenerateString()
 	assert.Equal(
 		t,
-		"SPD*1.0*ACC:CZ5855000000001265098001*RN:GO*DT:20211224*MSG:M*NT:E*NT:DANIEL@MILDE.CZ*",
+		"SPD*1.0*ACC:CZ5855000000001265098001*RF:111*RN:GO*DT:20211224*MSG:M*PT:P2P*NT:E*NT:DANIEL@MILDE.CZ*",
 		s,
 	)
 }
@@ -71,4 +73,15 @@ func TestGenerateStringWithourIBAN(t *testing.T) {
 	s, err := p.GenerateString()
 	assert.Equal(t, "", s)
 	assert.Equal(t, "IBAN is mandatory", err.Error())
+}
+
+func TestWrongNotificationType(t *testing.T) {
+	defer func() {
+		err := recover()
+		assert.NotNil(t, err)
+		assert.Equal(t, "nofification type 'X' is not supported (E | P)", err)
+	}()
+
+	p := spayd.NewSpaydPayment()
+	p.SetNofificationType('X')
 }
