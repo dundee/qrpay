@@ -1,3 +1,5 @@
+<img src="./qr-payment.png" alt="QR code for payment" align="right">
+
 # QR code payments for Go
 
 [![Build Status](https://travis-ci.com/dundee/go-qrcode-payment.svg?branch=master)](https://travis-ci.com/dundee/go-qrcode-payment)
@@ -5,8 +7,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/dundee/go-qrcode-payment)](https://goreportcard.com/report/github.com/dundee/go-qrcode-payment)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8cc57dc57951015c791d/maintainability)](https://codeclimate.com/github/dundee/go-qrcode-payment/maintainability)
 [![CodeScene Code Health](https://codescene.io/projects/14391/status-badges/code-health)](https://codescene.io/projects/14391)
-
-<img src="./qr-payment.png" alt="QR code for payment" align="right">
 
 Golang library for creating QR codes for payments.
 
