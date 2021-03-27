@@ -48,6 +48,7 @@ p.SetIBAN("CZ5855000000001265098001")
 p.SetAmount("108")
 
 fmt.Println(payment.GenerateString())
+// Output: SPD*1.0*ACC:CZ5855000000001265098001*AM:108*
 ```
 
 ## TODO
