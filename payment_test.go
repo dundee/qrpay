@@ -41,6 +41,19 @@ func TestSaveQRCode(t *testing.T) {
 	assert.FileExists(t, path)
 }
 
+func TestSaveEpcQRCode(t *testing.T) {
+	path := "qr.jpeg"
+	defer os.Remove(path)
+
+	p := payment.NewEpcPayment()
+	p.SetRecipientName("Red Cross")
+	p.SetIBAN("CZ5855000000001265098001")
+
+	payment.SaveQRCodeImageToFile(p, path)
+
+	assert.FileExists(t, path)
+}
+
 func TestSaveQRCodeWithErr(t *testing.T) {
 	path := "qr.jpeg"
 	p := payment.NewSpaydPayment()

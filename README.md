@@ -1,6 +1,6 @@
 <img src="./qr-payment.png" alt="QR code for payment" align="right">
 
-# QR code payments for Go
+# Payment QR code for Go
 
 [![Build Status](https://travis-ci.com/dundee/go-qrcode-payment.svg?branch=master)](https://travis-ci.com/dundee/go-qrcode-payment)
 [![codecov](https://codecov.io/gh/dundee/go-qrcode-payment/branch/master/graph/badge.svg)](https://codecov.io/gh/dundee/go-qrcode-payment)
@@ -10,7 +10,8 @@
 
 Golang library for creating QR codes for payments.
 
-[Short Payment Descriptor](https://en.wikipedia.org/wiki/Short_Payment_Descriptor) format is supported for now.
+[Short Payment Descriptor](https://en.wikipedia.org/wiki/Short_Payment_Descriptor) format and
+[EPC QR Code](https://en.wikipedia.org/wiki/EPC_QR_code) (SEPA) format is supported.
 
 ## Installation
 
@@ -18,7 +19,7 @@ Golang library for creating QR codes for payments.
 
 ## Usage
 
-### Generating QR code image
+### Generating QR code image for Short Payment Descriptor format
 
 ```Go
 import payment "github.com/dundee/go-qrcode-payment"
@@ -36,9 +37,23 @@ p.SetExtendedAttribute("vs", "1234567890")
 payment.SaveQRCodeImageToFile(p, "qr-payment.png")
 ```
 
+### Generating QR code image for EPC QR Code
+
+```Go
+import payment "github.com/dundee/go-qrcode-payment"
+
+p := payment.NewEpcPayment()
+p.SetIBAN("CZ5855000000001265098001")
+p.SetAmount("10.8")
+p.SetMessage("M")
+p.SetRecipientName("go")
+
+payment.SaveQRCodeImageToFile(p, "qr-payment.png")
+```
+
 QR code image encoding uses [skip2/go-qrcode](https://github.com/skip2/go-qrcode).
 
-### Getting QR code content
+### Getting QR code content for Short Payment Descriptor format
 
 ```Go
 import payment "github.com/dundee/go-qrcode-payment"
@@ -50,7 +65,3 @@ p.SetAmount("108")
 fmt.Println(payment.GenerateString())
 // Output: SPD*1.0*ACC:CZ5855000000001265098001*AM:108*
 ```
-
-## TODO
-
-* support for [EPC QR code](https://en.wikipedia.org/wiki/EPC_QR_code)

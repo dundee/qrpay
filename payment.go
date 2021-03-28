@@ -2,6 +2,7 @@ package payment
 
 import (
 	"github.com/dundee/go-qrcode-payment/common"
+	"github.com/dundee/go-qrcode-payment/epc"
 	"github.com/dundee/go-qrcode-payment/spayd"
 
 	qrcode "github.com/skip2/go-qrcode"
@@ -9,6 +10,10 @@ import (
 
 func NewSpaydPayment() *spayd.SpaydPayment {
 	return spayd.NewSpaydPayment()
+}
+
+func NewEpcPayment() *epc.EpcPayment {
+	return epc.NewEpcPayment()
 }
 
 func SaveQRCodeImageToFile(payment common.QRCodeGenerator, path string) error {
