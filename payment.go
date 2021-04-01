@@ -1,12 +1,9 @@
 /*
 Package for creating QR codes for payments.
 
-[Short Payment Descriptor](https://en.wikipedia.org/wiki/Short_Payment_Descriptor) format and
-[EPC QR Code](https://en.wikipedia.org/wiki/EPC_QR_code) (SEPA) format is supported.
+Short Payment Descriptor format and EPC QR Code (SEPA) format is supported.
 
-## Usage
-
-### Generating QR code image for Short Payment Descriptor format
+- Generating QR code image for Short Payment Descriptor format
 
 	import payment "github.com/dundee/go-qrcode-payment"
 
@@ -22,7 +19,7 @@ Package for creating QR codes for payments.
 
 	payment.SaveQRCodeImageToFile(p, "qr-payment.png")
 
-### Generating QR code image for EPC QR Code
+- Generating QR code image for EPC QR Code
 
 	import payment "github.com/dundee/go-qrcode-payment"
 
@@ -34,9 +31,9 @@ Package for creating QR codes for payments.
 
 	payment.SaveQRCodeImageToFile(p, "qr-payment.png")
 
-QR code image encoding uses [skip2/go-qrcode](https://github.com/skip2/go-qrcode).
+QR code image encoding uses https://github.com/skip2/go-qrcode
 
-### Getting QR code content for Short Payment Descriptor format
+- Getting QR code content for Short Payment Descriptor format
 
 	import payment "github.com/dundee/go-qrcode-payment"
 
