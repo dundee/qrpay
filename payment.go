@@ -63,7 +63,7 @@ func NewEpcPayment() *epc.EpcPayment {
 	return epc.NewEpcPayment()
 }
 
-func SaveQRCodeImageToFile(payment common.QRCodeGenerator, path string) error {
+func SaveQRCodeImageToFile(payment common.Payment, path string) error {
 	content, err := payment.GenerateString()
 	if err != nil {
 		return err
@@ -71,7 +71,7 @@ func SaveQRCodeImageToFile(payment common.QRCodeGenerator, path string) error {
 	return qrcode.WriteFile(content, qrcode.Medium, 400, path)
 }
 
-func GetQRCodeImage(payment common.QRCodeGenerator) ([]byte, error) {
+func GetQRCodeImage(payment common.Payment) ([]byte, error) {
 	content, err := payment.GenerateString()
 	if err != nil {
 		return nil, err

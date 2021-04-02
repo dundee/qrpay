@@ -13,7 +13,7 @@ import (
 const SpaydHeader = "SPD*1.0*"
 
 type SpaydPayment struct {
-	*common.Payment
+	*common.BasePayment
 	Date        time.Time
 	PaymentType string
 	NotifType   rune
@@ -23,7 +23,9 @@ type SpaydPayment struct {
 
 func NewSpaydPayment() *SpaydPayment {
 	return &SpaydPayment{
-		Payment:  &common.Payment{},
+		BasePayment: &common.BasePayment{
+			Errors: make(map[string]error),
+		},
 		Extended: make(map[string]string),
 	}
 }
@@ -114,4 +116,4 @@ func convertValue(value string) string {
 	return value
 }
 
-var _ common.QRCodeGenerator = (*SpaydPayment)(nil)
+var _ common.Payment = (*SpaydPayment)(nil)

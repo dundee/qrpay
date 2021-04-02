@@ -5,7 +5,7 @@ import (
 	"github.com/jbub/banking/swift"
 )
 
-type Payment struct {
+type BasePayment struct {
 	IBAN      string
 	BIC       string
 	Amount    string
@@ -13,38 +13,60 @@ type Payment struct {
 	Reference string
 	Recipient string
 	Msg       string
+	Errors    map[string]error
 }
 
-func NewPayment() *Payment {
-	return &Payment{}
+func NewBasePayment() *BasePayment {
+	return &BasePayment{
+		Errors: make(map[string]error),
+	}
 }
 
-func (p *Payment) SetIBAN(value string) {
-	iban.MustParse(value)
-	p.IBAN = value
+func (p *BasePayment) SetIBAN(value string) error {
+	_, err := iban.Parse(value)
+	if err != nil {
+		p.Errors["iban"] = err
+	} else {
+		p.IBAN = value
+	}
+	return err
 }
 
-func (p *Payment) SetBIC(value string) {
-	swift.MustParse(value)
-	p.BIC = value
+func (p *BasePayment) SetBIC(value string) error {
+	_, err := swift.Parse(value)
+	if err != nil {
+		p.Errors["bic"] = err
+	} else {
+		p.BIC = value
+	}
+	return err
 }
 
-func (p *Payment) SetAmount(value string) {
+func (p *BasePayment) SetAmount(value string) error {
 	p.Amount = value
+	return nil
 }
 
-func (p *Payment) SetCurrency(value string) {
+func (p *BasePayment) SetCurrency(value string) error {
 	p.Currency = value
+	return nil
 }
 
-func (p *Payment) SetSenderReference(value string) {
+func (p *BasePayment) SetSenderReference(value string) error {
 	p.Reference = value
+	return nil
 }
 
-func (p *Payment) SetRecipientName(value string) {
+func (p *BasePayment) SetRecipientName(value string) error {
 	p.Recipient = value
+	return nil
 }
 
-func (p *Payment) SetMessage(value string) {
+func (p *BasePayment) SetMessage(value string) error {
 	p.Msg = value
+	return nil
+}
+
+func (p *BasePayment) GetErrors() map[string]error {
+	return p.Errors
 }

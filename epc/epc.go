@@ -14,13 +14,15 @@ SCT
 `
 
 type EpcPayment struct {
-	*common.Payment
+	*common.BasePayment
 	Purpose string
 }
 
 func NewEpcPayment() *EpcPayment {
 	return &EpcPayment{
-		Payment: &common.Payment{},
+		BasePayment: &common.BasePayment{
+			Errors: make(map[string]error),
+		},
 	}
 }
 
@@ -69,4 +71,4 @@ func (p *EpcPayment) GenerateString() (string, error) {
 	return strings.TrimSpace(res.String()), nil
 }
 
-var _ common.QRCodeGenerator = (*EpcPayment)(nil)
+var _ common.Payment = (*EpcPayment)(nil)

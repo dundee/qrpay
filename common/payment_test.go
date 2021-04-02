@@ -7,18 +7,23 @@ import (
 )
 
 func TestWrongIban(t *testing.T) {
-	defer func() {
-		err := recover()
-		assert.NotNil(t, err)
-		assert.Equal(t, "iban: iban too short", err.(error).Error())
-	}()
+	p := NewBasePayment()
+	err := p.SetIBAN("111")
+	assert.Equal(t, "iban: iban too short", err.Error())
+	errors := p.GetErrors()
+	assert.Equal(t, "iban: iban too short", errors["iban"].Error())
+}
 
-	p := NewPayment()
-	p.SetIBAN("111")
+func TestWrongBic(t *testing.T) {
+	p := NewBasePayment()
+	err := p.SetBIC("111")
+	assert.Equal(t, "swift: invalid length", err.Error())
+	errors := p.GetErrors()
+	assert.Equal(t, "swift: invalid length", errors["bic"].Error())
 }
 
 func TestMethods(t *testing.T) {
-	p := NewPayment()
+	p := NewBasePayment()
 	p.SetIBAN("CZ5855000000001265098001")
 	p.SetBIC("BHBLDEHHXXX")
 	p.SetCurrency("EUR")
