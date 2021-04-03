@@ -3,7 +3,7 @@ package epc_test
 import (
 	"testing"
 
-	"github.com/dundee/go-qrcode-payment/epc"
+	"github.com/dundee/qrpay/epc"
 	"github.com/stretchr/testify/assert"
 )
 

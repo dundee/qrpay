@@ -1,18 +1,18 @@
-package payment_test
+package qrpay_test
 
 import (
 	"os"
 	"testing"
 
-	payment "github.com/dundee/go-qrcode-payment"
+	"github.com/dundee/qrpay"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestGetQRCodeImage(t *testing.T) {
-	p := payment.NewSpaydPayment()
+	p := qrpay.NewSpaydPayment()
 	p.SetIBAN("CZ5855000000001265098001")
 
-	b, _ := payment.GetQRCodeImage(p)
+	b, _ := qrpay.GetQRCodeImage(p)
 
 	// check start of PNG image
 	assert.True(t, len(b) > 10)
@@ -21,9 +21,9 @@ func TestGetQRCodeImage(t *testing.T) {
 }
 
 func TestGetQRCodeImageWithErr(t *testing.T) {
-	p := payment.NewSpaydPayment()
+	p := qrpay.NewSpaydPayment()
 
-	b, err := payment.GetQRCodeImage(p)
+	b, err := qrpay.GetQRCodeImage(p)
 
 	assert.Nil(t, b)
 	assert.Equal(t, "IBAN is mandatory", err.Error())
@@ -33,10 +33,10 @@ func TestSaveQRCode(t *testing.T) {
 	path := "qr.jpeg"
 	defer os.Remove(path)
 
-	p := payment.NewSpaydPayment()
+	p := qrpay.NewSpaydPayment()
 	p.SetIBAN("CZ5855000000001265098001")
 
-	payment.SaveQRCodeImageToFile(p, path)
+	qrpay.SaveQRCodeImageToFile(p, path)
 
 	assert.FileExists(t, path)
 }
@@ -45,19 +45,19 @@ func TestSaveEpcQRCode(t *testing.T) {
 	path := "qr.jpeg"
 	defer os.Remove(path)
 
-	p := payment.NewEpcPayment()
+	p := qrpay.NewEpcPayment()
 	p.SetRecipientName("Red Cross")
 	p.SetIBAN("CZ5855000000001265098001")
 
-	payment.SaveQRCodeImageToFile(p, path)
+	qrpay.SaveQRCodeImageToFile(p, path)
 
 	assert.FileExists(t, path)
 }
 
 func TestSaveQRCodeWithErr(t *testing.T) {
 	path := "qr.jpeg"
-	p := payment.NewSpaydPayment()
-	err := payment.SaveQRCodeImageToFile(p, path)
+	p := qrpay.NewSpaydPayment()
+	err := qrpay.SaveQRCodeImageToFile(p, path)
 
 	assert.Equal(t, "IBAN is mandatory", err.Error())
 }

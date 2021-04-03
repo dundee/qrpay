@@ -1,4 +1,4 @@
-package common
+package base
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 )
 
 func TestWrongIban(t *testing.T) {
-	p := NewBasePayment()
+	p := NewPayment()
 	err := p.SetIBAN("111")
 	assert.Equal(t, "iban: iban too short", err.Error())
 	errors := p.GetErrors()
@@ -15,7 +15,7 @@ func TestWrongIban(t *testing.T) {
 }
 
 func TestWrongBic(t *testing.T) {
-	p := NewBasePayment()
+	p := NewPayment()
 	err := p.SetBIC("111")
 	assert.Equal(t, "swift: invalid length", err.Error())
 	errors := p.GetErrors()
@@ -23,7 +23,7 @@ func TestWrongBic(t *testing.T) {
 }
 
 func TestMethods(t *testing.T) {
-	p := NewBasePayment()
+	p := NewPayment()
 	p.SetIBAN("CZ5855000000001265098001")
 	p.SetBIC("BHBLDEHHXXX")
 	p.SetCurrency("EUR")

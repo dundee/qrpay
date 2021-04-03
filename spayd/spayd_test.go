@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dundee/go-qrcode-payment/spayd"
+	"github.com/dundee/qrpay/spayd"
 	"github.com/stretchr/testify/assert"
 )
 

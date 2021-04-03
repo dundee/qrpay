@@ -1,4 +1,4 @@
-package common
+package base
 
 // TrimToLength shortends given string to given length
 func TrimToLength(value string, length int) string {
