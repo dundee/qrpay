@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.com/dundee/qrpay.svg?branch=master)](https://travis-ci.com/dundee/qrpay)
 [![codecov](https://codecov.io/gh/dundee/qrpay/branch/master/graph/badge.svg)](https://codecov.io/gh/dundee/qrpay)
 [![Go Report Card](https://goreportcard.com/badge/github.com/dundee/qrpay)](https://goreportcard.com/report/github.com/dundee/qrpay)
-[![Maintainability](https://api.codeclimate.com/v1/badges/8cc57dc57951015c791d/maintainability)](https://codeclimate.com/github/dundee/qrpay/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6b488832f724e32e0c6e/maintainability)](https://codeclimate.com/github/dundee/qrpay/maintainability)
 [![CodeScene Code Health](https://codescene.io/projects/14391/status-badges/code-health)](https://codescene.io/projects/14391)
 
 Golang library for creating QR codes for payments.
