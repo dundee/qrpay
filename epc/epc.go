@@ -60,7 +60,7 @@ func (p *EpcPayment) GenerateString() (string, error) {
 	res.WriteString("\n")
 
 	if p.Reference != "" {
-		res.WriteString(base.TrimToLength(p.Reference, 4))
+		res.WriteString(base.TrimToLength(p.Reference, 140))
 	}
 	res.WriteString("\n\n")
 

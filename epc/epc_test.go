@@ -43,7 +43,7 @@ func TestDEPayment(t *testing.T) {
 func TestOtherParams(t *testing.T) {
 	p := epc.NewEpcPayment()
 	p.SetIBAN("CZ5855000000001265098001")
-	p.SetSenderReference("111")
+	p.SetSenderReference("111111")
 	p.SetMessage("M")
 	p.SetRecipientName("go")
 	p.SetPurpose("GDDS")
@@ -51,7 +51,7 @@ func TestOtherParams(t *testing.T) {
 	s, _ := p.GenerateString()
 	assert.Equal(
 		t,
-		"BCD\n002\n1\nSCT\n\ngo\nCZ5855000000001265098001\n\nGDDS\n111\n\nM",
+		"BCD\n002\n1\nSCT\n\ngo\nCZ5855000000001265098001\n\nGDDS\n111111\n\nM",
 		s,
 	)
 }
