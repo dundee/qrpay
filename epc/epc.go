@@ -50,6 +50,9 @@ func (p *EpcPayment) GenerateString() (string, error) {
 	res.WriteString(base.TrimToLength(p.IBAN, 34) + "\n")
 
 	if p.Amount != "" {
+		if p.Currency != "" {
+			res.WriteString(base.TrimToLength(p.Currency, 3))
+		}
 		res.WriteString(base.TrimToLength(p.Amount, 12))
 	}
 	res.WriteString("\n")
