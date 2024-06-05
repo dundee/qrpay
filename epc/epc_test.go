@@ -37,7 +37,7 @@ func TestDEPayment(t *testing.T) {
 	p.SetAmount("10.8")
 
 	s, _ := p.GenerateString()
-	assert.Equal(t, "BCD\n002\n1\nSCT\nBHBLDEHHXXX\nFranz Mustermänn\nDE71110220330123456789\n10.8", s)
+	assert.Equal(t, "BCD\n002\n1\nSCT\nBHBLDEHHXXX\nFranz Mustermänn\nDE71110220330123456789\nEUR10.8", s)
 }
 
 func TestOtherParams(t *testing.T) {
